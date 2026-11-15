@@ -5,7 +5,7 @@
 <title>anilcodez — Bağlantılar</title>
 <meta name="description" content="anilcodez'in tüm bağlantıları: Fırsat Radarı, Instagram, web sitesi, LinkedIn, GitHub ve e-posta.">
 <meta name="color-scheme" content="light dark">
-<link rel="canonical" href="https://anilyoz23.github.io/links/">
+<link rel="canonical" href="https://aniloz.dev/links/">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#f8f8fa" media="(prefers-color-scheme: light)">
@@ -13,8 +13,8 @@
 <meta property="og:type" content="profile">
 <meta property="og:title" content="anilcodez — Bağlantılar">
 <meta property="og:description" content="Fırsat Radarı, içerikler ve iletişim tek sayfada.">
-<meta property="og:url" content="https://anilyoz23.github.io/links/">
-<meta property="og:image" content="https://anilyoz23.github.io/assets/og-cover.png?v=2">
+<meta property="og:url" content="https://aniloz.dev/links/">
+<meta property="og:image" content="https://aniloz.dev/assets/og-cover.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="me" href="https://www.instagram.com/anilcodez/"><link rel="me" href="https://github.com/anilyoz23"><link rel="me" href="https://www.linkedin.com/in/anilyoz">
 <link rel="preload" href="/assets/Satoshi-Black.woff2" as="font" type="font/woff2" crossorigin>
@@ -82,7 +82,7 @@ footer a{border-bottom:1px solid var(--line);padding-bottom:2px}footer a:hover{c
 <body>
 <div class="page">
  <div class="top">
-  <a href="/" lang="en">anilyoz23.github.io</a>
+  <a href="/" lang="en">aniloz.dev</a>
   <div class="tools">
    <button class="iconbtn" id="share" type="button" aria-label="Bağlantıyı paylaş">↗</button>
    <button class="iconbtn" id="theme" type="button" aria-label="Temayı değiştir">☾</button>
@@ -148,7 +148,7 @@ toggle.addEventListener('click', () => {
 const toast = document.getElementById('toast');
 function say(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1800); }
 document.getElementById('share').addEventListener('click', async () => {
- const url = 'https://anilyoz23.github.io/links/';
+ const url = 'https://aniloz.dev/links/';
  if (navigator.share) { try { await navigator.share({ title: 'anilcodez', url }); } catch {} return; }
  try { await navigator.clipboard.writeText(url); say('Bağlantı kopyalandı'); } catch { say(url); }
 });
