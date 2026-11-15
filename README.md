@@ -11,6 +11,7 @@ Anıl Yağız Öz'ün kişisel sitesi. Yazılım, yapay zeka ve tasarım üzerin
 - **Açık / koyu tema.** Site cihazın ayarına uyar. Butonla seçilen tema, cihaz ayarı değişene kadar hatırlanır.
 - **Çalışmalar.** İçerik serileri ve projeler için kartlar (ör. Fırsat Radarı).
 - **İletişim.** E-posta, Instagram, LinkedIn ve GitHub bağlantıları.
+- **Bağlantılar sayfası.** [/links](https://anilyoz23.github.io/links/) Linktree yerine kullanılan, site temasında link-in-bio sayfası.
 - **Özel 404 sayfası.** Yapay zeka sohbeti tarzında, "yanıtı yeniden oluştur" butonlu.
 - **Paylaşım önizlemesi.** Link WhatsApp, Instagram ya da LinkedIn'de kapak görseliyle görünür.
 - **Hafif.** Framework yok, build adımı yok. Tek HTML dosyası, WebP görseller, yerel fontlar.
@@ -19,6 +20,7 @@ Anıl Yağız Öz'ün kişisel sitesi. Yazılım, yapay zeka ve tasarım üzerin
 
 ```
 index.html     Ana sayfa (HTML, CSS ve JS tek dosyada)
+links/         Instagram biyografisi için bağlantılar sayfası
 404.html       Bulunamayan sayfalar için hata ekranı
 robots.txt     Arama motorlarına tarama izni
 sitemap.xml    Arama motorları için sayfa listesi
