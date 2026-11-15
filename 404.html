@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — Sayfa bulunamadı · anilcodez</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#f8f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)">
+<script>(function(){var d=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light',t=null;try{t=JSON.parse(localStorage.getItem('anil-theme-v2')||'null')}catch(e){}document.documentElement.dataset.theme=t&&t.system===d&&(t.theme==='dark'||t.theme==='light')?t.theme:d})()</script>
+<style>
+@font-face{font-family:Satoshi;src:url('/assets/Satoshi-Regular.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:Satoshi;src:url('/assets/Satoshi-Bold.woff2') format('woff2');font-weight:700;font-display:swap}@font-face{font-family:Satoshi;src:url('/assets/Satoshi-Black.woff2') format('woff2');font-weight:900;font-display:swap}@font-face{font-family:Mono;src:url('/assets/JetBrainsMono-Regular.woff2') format('woff2');font-display:swap}
+:root{--bg:#f8f8fa;--ink:#1b1820;--muted:#716c7e;--line:#dedbe4;--grid:rgba(27,24,32,.055);--purple:#a259ff;--glass:rgba(255,255,255,.68);--solid:#fff}
+[data-theme=dark]{--bg:#0a0a0f;--ink:#f5f3fa;--muted:#a49daf;--line:#302c39;--grid:rgba(255,255,255,.055);--glass:rgba(255,255,255,.065);--solid:#16141d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:Satoshi,sans-serif;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:72px 72px}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:3px solid var(--purple);outline-offset:5px}
+.wrap{max-width:760px;width:100%;margin:auto;padding:0 24px}
+header{border-bottom:1px solid var(--line);background:var(--bg)}
+nav{height:80px;display:flex;align-items:center;justify-content:space-between;max-width:1240px;margin:auto;padding:0 24px}
+.logo{font-weight:900;font-size:27px;letter-spacing:-1.2px}.logo span{color:var(--purple)}
+main{flex:1;display:flex;align-items:center;padding:56px 0}
+.eyebrow{font:12px Mono,monospace;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:10px;color:var(--muted)}
+.eyebrow:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--purple)}
+h1{font-size:clamp(88px,20vw,168px);line-height:.9;font-weight:900;letter-spacing:-7px;margin:18px 0 28px}
+h1 em{font-style:normal;color:var(--purple)}
+.chat{border:1px solid var(--line);border-radius:26px;background:var(--glass);backdrop-filter:blur(14px);padding:22px;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:88%;padding:14px 18px;border-radius:20px;font-size:17px;line-height:1.55}
+.user{align-self:flex-end;background:var(--ink);color:var(--bg);border-bottom-right-radius:6px;font:14px/1.5 Mono,monospace;word-break:break-all}
+.bot{align-self:flex-start;border:1px solid var(--line);background:var(--solid);border-bottom-left-radius:6px}
+.who{display:block;font:11px Mono,monospace;letter-spacing:1.5px;color:var(--muted);margin-bottom:6px}
+.dots{display:inline-flex;gap:5px;padding:6px 0}.dots i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:b 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,60%,100%{opacity:.25;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:30px;font-size:15px;font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:22px;border:1.5px solid var(--ink);padding:14px 22px;border-radius:100px;background:var(--ink);color:var(--bg);transition:transform .2s}.pill:hover{transform:translateY(-3px)}
+.ghost{background:none;border:0;border-bottom:1px solid var(--line);padding:0 0 4px}.ghost:hover{color:var(--purple)}
+footer{border-top:1px solid var(--line);padding:22px 24px;text-align:center;font-size:13px;color:var(--muted);background:var(--bg)}
+@media(max-width:600px){h1{letter-spacing:-4px}.msg{font-size:16px;max-width:94%}.chat{padding:16px;border-radius:22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><nav aria-label="Ana menü"><a class="logo" href="/">anilcodez<span>.</span></a></nav></header>
+<main><div class="wrap">
+ <div class="eyebrow">Hata 404 · Sayfa bulunamadı</div>
+ <h1>4<em>0</em>4</h1>
+ <div class="chat" aria-live="polite">
+  <div class="msg user" id="ask">Bu sayfayı aç</div>
+  <div class="msg bot"><span class="who">ANILCODEZ ASİSTAN</span><span id="reply"><span class="dots" aria-label="Yazıyor"><i></i><i></i><i></i></span></span></div>
+ </div>
+ <div class="actions">
+  <a class="pill" href="/">Ana sayfaya dön <span aria-hidden="true">↗</span></a>
+  <button class="ghost" id="again" type="button">↻ Yanıtı yeniden oluştur</button>
+ </div>
+</div></main>
+<footer>© 2026 anilcodez · Yazılım · Yapay zekâ · Tasarım</footer>
+<script>
+const replies = [
+ 'Üzgünüm, bu konuda yardımcı olamıyorum. Aradığın sayfa hiç var olmamış ya da başka bir yere taşınmış olabilir.',
+ 'Bu sayfayı bulmak için tüm sunucuyu taradım. Sonuç: koca bir hiç. Ana sayfadan devam etmeye ne dersin?',
+ 'Dürüst olmam gerekirse bu sayfayı halüsinasyonla bile üretemedim. Bağlantıyı bir kontrol eder misin?',
+ 'Bağlam penceremde böyle bir sayfa yok. Belki adres yanlış yazıldı, belki de sayfa emekliye ayrıldı.',
+ 'Bu isteği yerine getiremiyorum, çünkü istenen sayfa mevcut değil. Ama ana sayfada güzel şeyler var.'
+];
+const ask = document.getElementById('ask'), reply = document.getElementById('reply');
+ask.textContent = decodeURIComponent(location.pathname) + ' sayfasını aç';
+let i = 0, timer;
+function answer() {
+ clearTimeout(timer);
+ reply.innerHTML = '<span class="dots" aria-label="Yazıyor"><i></i><i></i><i></i></span>';
+ const text = replies[i++ % replies.length];
+ timer = setTimeout(() => { reply.textContent = text; }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 900);
+}
+answer();
+document.getElementById('again').addEventListener('click', answer);
+</script>
+</body></html>
