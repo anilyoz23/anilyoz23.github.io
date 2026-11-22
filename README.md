@@ -12,6 +12,7 @@ Anıl Yağız Öz'ün kişisel sitesi. Yazılım, yapay zeka ve tasarım üzerin
 - **Çalışmalar.** İçerik serileri ve projeler için kartlar (ör. Fırsat Radarı).
 - **İletişim.** E-posta, Instagram, LinkedIn ve GitHub bağlantıları.
 - **Bağlantılar sayfası.** [/links](https://aniloz.dev/links/) Linktree yerine kullanılan, site temasında link-in-bio sayfası.
+- **DM sayfaları.** `/dm/` altında Instagram DM otomasyonunun gönderdiği sayfalar; ilki [/dm/claude-video](https://aniloz.dev/dm/claude-video/) (5 araç + tek dokunuşla kopyalanan kurulum prompt'u).
 - **Özel 404 sayfası.** Yapay zeka sohbeti tarzında, "yanıtı yeniden oluştur" butonlu.
 - **Paylaşım önizlemesi.** Link WhatsApp, Instagram ya da LinkedIn'de kapak görseliyle görünür.
 - **Hafif.** Framework yok, build adımı yok. Tek HTML dosyası, WebP görseller, yerel fontlar.
@@ -20,6 +21,7 @@ Anıl Yağız Öz'ün kişisel sitesi. Yazılım, yapay zeka ve tasarım üzerin
 
 ```
 index.html     Ana sayfa (HTML, CSS ve JS tek dosyada)
+dm/            DM otomasyonundan gelenler için sayfalar
 links/         Instagram biyografisi için bağlantılar sayfası
 404.html       Bulunamayan sayfalar için hata ekranı
 CNAME          Özel alan adı (aniloz.dev)

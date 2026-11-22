@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude ile video: 5 ücretsiz araç ve kurulum prompt'u · anilcodez</title>
+<meta name="description" content="Claude ile video yapmak için 5 ücretsiz araç: FFmpeg, yt-dlp, Whisper, HyperFrames ve GSAP. Claude Code'a yapıştıracağın kurulum prompt'u tek dokunuşla kopyalanır.">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://aniloz.dev/dm/claude-video/">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#f8f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="anilcodez">
+<meta property="og:title" content="Bunlar olmadan Claude'la video yok.">
+<meta property="og:description" content="5 ücretsiz araç ve Claude Code'a yapıştıracağın kurulum prompt'u. Tek dokunuşla kopyala.">
+<meta property="og:url" content="https://aniloz.dev/dm/claude-video/">
+<meta property="og:image" content="https://aniloz.dev/assets/dm-claude-video-og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bunlar olmadan video yok: HyperFrames, GSAP, Whisper, FFmpeg ve yt-dlp Claude'un etrafında.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aniloz.dev/assets/dm-claude-video-og.png">
+<link rel="preload" href="/assets/Satoshi-Black.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(){var d=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light',t=null;try{t=JSON.parse(localStorage.getItem('anil-theme-v2')||'null')}catch(e){}document.documentElement.dataset.theme=t&&t.system===d&&(t.theme==='dark'||t.theme==='light')?t.theme:d})()</script>
+<style>
+@font-face{font-family:Satoshi;src:url('/assets/Satoshi-Regular.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:Satoshi;src:url('/assets/Satoshi-Bold.woff2') format('woff2');font-weight:700;font-display:swap}@font-face{font-family:Satoshi;src:url('/assets/Satoshi-Black.woff2') format('woff2');font-weight:900;font-display:swap}@font-face{font-family:Mono;src:url('/assets/JetBrainsMono-Regular.woff2') format('woff2');font-display:swap}
+:root{--bg:#f8f8fa;--ink:#1b1820;--muted:#6e6878;--line:#dedbe4;--grid:rgba(27,24,32,.055);--purple:#a259ff;--purple-ink:#7b2fe0;--glass:rgba(255,255,255,.66);--glass-line:rgba(27,24,32,.13);--shine:rgba(255,255,255,.95);--dots:#c9a8ff;--solid:#fff;--code:#1b1820;--code-ink:#f5f3fa;--code-muted:#9a93a8}
+[data-theme=dark]{--bg:#0a0a0f;--ink:#f5f3fa;--muted:#a49daf;--line:#2c2835;--grid:rgba(255,255,255,.055);--purple-ink:#c49bff;--glass:rgba(255,255,255,.055);--glass-line:rgba(255,255,255,.16);--shine:rgba(255,255,255,.35);--dots:#5c3a96;--solid:#15131c;--code:#111018;--code-ink:#f5f3fa;--code-muted:#8e8a9e}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;overflow-x:hidden;position:relative;background:var(--bg);color:var(--ink);font-family:Satoshi,sans-serif;font-size:17px;line-height:1.5;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:72px 72px;background-position:center top;-webkit-font-smoothing:antialiased}
+body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.12;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23888' filter='url(%23n)' opacity='.28' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--purple);outline-offset:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.mono{font-family:Mono,monospace}
+.label{font:12px Mono,monospace;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:9px}
+.label:before{content:'';width:7px;height:7px;border-radius:50%;background:var(--purple)}
+
+/* top */
+.top{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
+.logo{font-weight:900;font-size:24px;letter-spacing:-1px}.logo span{color:var(--purple)}
+.top-right{display:flex;align-items:center;gap:10px}
+.ghost-link{font-size:14px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:3px}
+.ghost-link:hover{color:var(--purple)}
+.iconbtn{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:16px;background:var(--bg)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;padding:36px 0 56px}
+.chip{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--ink);border-radius:100px;padding:8px 15px;font:12px Mono,monospace;letter-spacing:1.8px;text-transform:uppercase;background:var(--bg)}
+.chip:before{content:'';width:7px;height:7px;border-radius:50%;background:var(--purple)}
+h1{font-size:clamp(46px,7vw,88px);line-height:.98;letter-spacing:-3.5px;font-weight:900;margin:22px 0 22px}
+h1 em{font-style:normal;color:var(--purple);display:inline-block;text-shadow:5px 5px 0 var(--dots)}
+.lead{font-size:19px;line-height:1.6;color:var(--muted);max-width:470px;margin:0 0 28px}
+.lead strong{color:var(--ink)}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;border-radius:100px;padding:15px 24px;font-weight:700;font-size:16px;transition:transform .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn-ink{background:var(--ink);color:var(--bg);border:1.5px solid var(--ink)}
+.btn-purple{background:var(--purple);color:#fff;border:1.5px solid var(--purple)}
+.btn .arr{font-size:20px;line-height:1}
+.text-link{font-weight:700;font-size:15px;border-bottom:1px solid var(--line);padding-bottom:4px}
+
+/* orbit */
+.stage{position:relative;aspect-ratio:1;max-width:460px;width:100%;justify-self:center}
+.window{position:absolute;inset:6% 0 6% 0;border-radius:30px;border:1px solid var(--glass-line);background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);overflow:hidden}
+.window:after{content:'';position:absolute;top:-1px;left:16%;right:16%;height:1px;background:linear-gradient(90deg,transparent,var(--shine),transparent)}
+.bar{display:flex;align-items:center;gap:7px;padding:14px 18px;border-bottom:1px solid var(--glass-line);font:11px Mono,monospace;letter-spacing:1.4px;color:var(--muted)}
+.bar i{width:8px;height:8px;border-radius:50%;border:1px solid var(--muted)}
+.bar span{margin-left:8px}
+.ring{position:absolute;left:50%;top:55%;width:64%;aspect-ratio:1;transform:translate(-50%,-50%);border:1.5px dashed var(--line);border-radius:50%;animation:spin 46s linear infinite}
+.arm{position:absolute;inset:0;transform:rotate(var(--a))}
+.holder{position:absolute;left:50%;top:0;transform:translate(-50%,-50%) rotate(calc(-1 * var(--a)))}
+.up{animation:spin 46s linear infinite reverse}
+.pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border:1.5px solid var(--ink);border-radius:100px;padding:7px 13px;font:12px Mono,monospace;letter-spacing:1.4px;background:var(--solid)}
+.pill:before{content:'';width:7px;height:7px;border-radius:50%;background:var(--purple)}
+.pill.on{background:var(--ink);color:var(--bg)}
+.core{position:absolute;left:50%;top:55%;width:27%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1.5px solid var(--glass-line);display:grid;place-items:center;background:var(--solid)}
+.core:before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(var(--dots) 1.3px,transparent 1.5px) 0 0/6px 6px;transform:translate(7px,7px);z-index:-1}
+.core svg{width:62%;height:62%;animation:spin 18s linear infinite}
+.core svg path{stroke:var(--ink)}
+.stamp{position:absolute;right:-2%;top:2%;transform:rotate(9deg);font-weight:900;font-size:30px;letter-spacing:.5px;color:var(--purple);border:3px solid var(--purple);border-radius:12px;padding:2px 14px 4px;background:var(--bg);text-shadow:3px 3px 0 var(--dots);z-index:3}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.step{padding:24px 24px 26px;display:flex;gap:16px;align-items:flex-start}
+.step+.step{border-left:1px solid var(--line)}
+.step b{font:900 34px Satoshi;color:var(--purple);line-height:1;letter-spacing:-1px}
+.step strong{display:block;font-size:17px}
+.step span{display:block;font-size:15px;color:var(--muted);line-height:1.5;margin-top:2px}
+
+/* tools */
+section{padding:84px 0 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:32px}
+h2{font-size:clamp(34px,4.6vw,52px);line-height:1.05;letter-spacing:-2px;font-weight:900;margin:14px 0 0}
+h2 em{font-style:normal;color:var(--purple)}
+.head p{max-width:330px;margin:0;color:var(--muted);font-size:16px;line-height:1.6}
+.tools{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.tool{grid-column:span 2;position:relative;border:1px solid var(--line);border-radius:26px;background:var(--glass);padding:24px 24px 22px;display:flex;flex-direction:column;overflow:hidden;transition:transform .25s,border-color .25s}
+.tool:nth-child(4),.tool:nth-child(5){grid-column:span 3}
+.tool:hover{transform:translateY(-4px);border-color:var(--ink)}
+.tool-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.num{font:900 54px/0.9 Satoshi;letter-spacing:-2px;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.tool:hover .num{color:var(--purple);-webkit-text-stroke-color:var(--purple)}
+.kind{font:11px Mono,monospace;letter-spacing:1.5px;border:1px solid var(--line);border-radius:100px;padding:6px 11px;color:var(--muted);background:var(--bg)}
+.kind.skill{border-color:var(--purple);color:var(--purple-ink)}
+.tool h3{font-size:28px;letter-spacing:-1px;margin:0 0 4px;font-weight:900}
+.tool .what{font:12px Mono,monospace;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple-ink);margin:0 0 12px}
+.tool p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:1.55}
+.ask{margin-top:auto;border-top:1px dashed var(--line);padding-top:14px;font-size:15px;line-height:1.45}
+.ask small{display:block;font:11px Mono,monospace;letter-spacing:1.4px;color:var(--muted);margin-bottom:5px}
+.ask q{quotes:"“" "”"}
+.tool-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px}
+.tool-foot code{font:12px Mono,monospace;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tool-foot a{flex:none;font-size:14px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:2px}
+.tool-foot a:hover{color:var(--purple)}
+.alt{display:inline-block;margin-left:6px;font:11px Mono,monospace;letter-spacing:1px;color:var(--muted);vertical-align:middle;border:1px dashed var(--line);border-radius:100px;padding:3px 9px}
+
+/* prompt */
+.prompt-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
+.prompt-side p{color:var(--muted);font-size:17px;line-height:1.65;margin:18px 0 0}
+.note{margin-top:24px;border:1.5px solid var(--purple);border-radius:20px;padding:16px 18px;font-size:15px;line-height:1.55;background:var(--glass)}
+.note strong{color:var(--purple-ink)}
+.term{position:relative;border-radius:26px;background:var(--code);color:var(--code-ink);border:1px solid #2c2835;box-shadow:12px 12px 0 -1px var(--dots);overflow:hidden}
+.term-bar{display:flex;align-items:center;gap:7px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.1);font:12px Mono,monospace;letter-spacing:1px;color:var(--code-muted)}
+.term-bar i{width:9px;height:9px;border-radius:50%;border:1px solid var(--code-muted)}
+.term-bar span{margin-left:8px;flex:1}
+.term-bar .chars{flex:none}
+pre{margin:0;padding:24px 24px 6px;font:15px/1.75 Mono,monospace;white-space:pre-wrap;word-break:break-word;-webkit-user-select:text;user-select:text}
+pre .hl{color:#c9a8ff}
+.term-foot{padding:18px 24px 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.copy{position:relative;display:inline-flex;align-items:center;gap:12px;background:var(--purple);color:#fff;border-radius:100px;padding:16px 26px;font-weight:700;font-size:17px;transition:transform .2s,background .2s}
+.copy:hover{transform:translateY(-2px)}
+.copy.done{background:#2fbf71}
+.copy svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.term-foot small{color:var(--code-muted);font-size:14px}
+
+/* examples */
+.examples{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.ex{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:20px;padding:16px 16px 16px 20px;background:var(--glass);text-align:left;width:100%;transition:border-color .2s}
+.ex:hover{border-color:var(--ink)}
+.ex span{flex:1;font-size:16px;line-height:1.45}
+.ex em{font-style:normal;flex:none;font:11px Mono,monospace;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:6px 10px}
+.ex.done em{color:#fff;background:#2fbf71;border-color:#2fbf71}
+
+/* end */
+.end{margin-top:90px;border-top:1px solid var(--line);padding:56px 0 120px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.end h2{font-size:clamp(30px,4vw,44px)}
+.end p{color:var(--muted);margin:10px 0 0}
+
+/* sticky copy (mobile) */
+.dock{position:fixed;left:12px;right:12px;margin:0 auto;max-width:460px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;display:none;align-items:center;gap:10px;padding:8px 8px 8px 18px;border-radius:100px;background:var(--ink);color:var(--bg);box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .3s,opacity .3s}
+.dock.hide{transform:translateY(140%);opacity:0;pointer-events:none}
+.dock span{flex:1;min-width:0;font-size:14px;font-weight:700;line-height:1.25}
+.dock span small{display:block;font:11px Mono,monospace;letter-spacing:1px;opacity:.7;font-weight:400}
+.dock .copy{padding:12px 18px;font-size:15px}
+.toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-30px);opacity:0;background:var(--ink);color:var(--bg);font:12px Mono,monospace;letter-spacing:1px;padding:11px 16px;border-radius:100px;transition:.25s;pointer-events:none;z-index:40}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring{animation-name:ringspin}
+@keyframes ringspin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+@media(max-width:900px){
+ .hero{grid-template-columns:1fr;padding-top:18px;gap:8px}
+ .stage{max-width:400px;margin-top:10px}
+ .tools{grid-template-columns:1fr 1fr}
+ .tool,.tool:nth-child(4),.tool:nth-child(5){grid-column:span 1}
+ .tool:nth-child(5){grid-column:span 2}
+ .prompt-wrap{grid-template-columns:1fr;gap:28px}
+}
+@media(max-width:640px){
+ body{font-size:16px}
+ .wrap{padding:0 16px}
+ .top{height:64px}
+ .ghost-link{display:none}
+ h1{letter-spacing:-2.4px;margin:18px 0}
+ .lead{font-size:17px}
+ .cta-row .btn{width:100%}
+ .cta-row .text-link{margin:0 auto}
+ .stamp{font-size:24px}
+ .pill{font-size:11px;padding:6px 11px}
+ .steps{grid-template-columns:1fr}
+ .step+.step{border-left:0;border-top:1px solid var(--line)}
+ .step{padding:18px 4px}
+ section{padding-top:64px}
+ .head{display:block}.head p{margin-top:14px}
+ .tools{grid-template-columns:1fr;gap:14px}
+ .tool,.tool:nth-child(4),.tool:nth-child(5){grid-column:span 1}
+ .tool{padding:20px 20px 18px}
+ .num{font-size:44px}
+ .tool h3{font-size:25px}
+ pre{font-size:14px;padding:20px 18px 4px}
+ .term{box-shadow:8px 8px 0 -1px var(--dots)}
+ .term-foot{padding:16px 18px 20px}
+ .term-foot .copy{width:100%;justify-content:center}
+ .examples{grid-template-columns:1fr}
+ .dock{display:flex}
+ .end{padding-bottom:130px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header class="top">
+  <a class="logo" href="/">anilcodez<span>.</span></a>
+  <div class="top-right">
+   <a class="ghost-link" href="https://www.instagram.com/reel/DgAsi6MIptO/" target="_blank" rel="noopener noreferrer">Reels'i izle ↗</a>
+   <button class="iconbtn" id="theme" type="button" aria-label="Temayı değiştir">☾</button>
+  </div>
+ </header>
+
+ <main>
+  <div class="hero">
+   <div class="reveal">
+    <span class="chip">Claude ile video · DM'den geldin</span>
+    <h1>Bunlar olmadan <em>video yok.</em></h1>
+    <p class="lead">Claude kodu yazıyor, videoyu bu <strong>5 ücretsiz araç</strong> yapıyor. Hepsini tek tek kurmana gerek yok: aşağıdaki prompt'u kopyala, <strong>Claude Code</strong>'a yapıştır, kurulumu o yapsın.</p>
+    <div class="cta-row">
+     <a class="btn btn-purple" href="#prompt">Prompt'a git <span class="arr">↓</span></a>
+     <a class="text-link" href="#araclar">Önce araçları tanı</a>
+    </div>
+   </div>
+   <div class="stage reveal" aria-hidden="true">
+    <div class="stamp">ŞART</div>
+    <div class="window">
+     <div class="bar"><i></i><i></i><i></i><span>BU-VIDEO.MP4</span></div>
+    </div>
+    <div class="ring">
+     <div class="arm" style="--a:0deg"><div class="holder"><div class="up"><span class="pill">HYPERFRAMES</span></div></div></div>
+     <div class="arm" style="--a:72deg"><div class="holder"><div class="up"><span class="pill on">GSAP</span></div></div></div>
+     <div class="arm" style="--a:144deg"><div class="holder"><div class="up"><span class="pill">FFMPEG</span></div></div></div>
+     <div class="arm" style="--a:216deg"><div class="holder"><div class="up"><span class="pill on">YT-DLP</span></div></div></div>
+     <div class="arm" style="--a:288deg"><div class="holder"><div class="up"><span class="pill">WHISPER</span></div></div></div>
+    </div>
+    <div class="core"><svg viewBox="0 0 100 100" fill="none" stroke-width="7" stroke-linecap="round"><path d="M50 10v80M10 50h80M21.7 21.7l56.6 56.6M78.3 21.7 21.7 78.3M31 13.8l38 72.4M86.2 31 13.8 69M69 13.8 31 86.2M13.8 31l72.4 38"/></svg></div>
+   </div>
+  </div>
+
+  <div class="steps reveal">
+   <div class="step"><b>1</b><div><strong>Prompt'u kopyala</strong><span>Aşağıdaki mor butona bir kez dokunman yeterli.</span></div></div>
+   <div class="step"><b>2</b><div><strong>Claude Code'a yapıştır</strong><span>Terminalde ya da Claude masaüstü uygulamasının Code sekmesinde.</span></div></div>
+   <div class="step"><b>3</b><div><strong>Türkçe iste</strong><span>"Şu videonun sesini temizle, altyazı ekle." Komutu o yazar.</span></div></div>
+  </div>
+
+  <section id="araclar">
+   <div class="head reveal">
+    <div><span class="label">Kutudakiler</span><h2>5 araç, <em>sıfır lira.</em></h2></div>
+    <p>Hepsi ücretsiz ve açık kaynak. Üçü bilgisayarına kurulan program, ikisi Claude'a "bu işi nasıl yapacağını" öğreten skill.</p>
+   </div>
+   <div class="tools">
+    <article class="tool reveal">
+     <div class="tool-top"><span class="num">01</span><span class="kind">ARAÇ</span></div>
+     <h3>FFmpeg</h3>
+     <div class="what">Kes · birleştir · sesi ayarla</div>
+     <p>Videonun İsviçre çakısı. Keser, birleştirir, formatını çevirir, sesi Instagram'ın istediği seviyeye getirir.</p>
+     <div class="ask"><small>CLAUDE'A ŞÖYLE DE</small><q>Videonun ilk 3 saniyesini kes, sesi -14 LUFS'a getir.</q></div>
+     <div class="tool-foot"><code>brew / winget</code><a href="https://ffmpeg.org" target="_blank" rel="noopener noreferrer">ffmpeg.org ↗</a></div>
+    </article>
+    <article class="tool reveal">
+     <div class="tool-top"><span class="num">02</span><span class="kind">ARAÇ</span></div>
+     <h3>yt-dlp</h3>
+     <div class="what">Linkten video ve ses</div>
+     <p>Linki verirsin, videoyu ya da sadece sesini indirir. Tasarım referansı toplamak için birebir. Sadece kendi videon ya da izinli içerik.</p>
+     <div class="ask"><small>CLAUDE'A ŞÖYLE DE</small><q>Bu linkteki videonun sadece sesini mp3 olarak indir.</q></div>
+     <div class="tool-foot"><code>brew / winget</code><a href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </article>
+    <article class="tool reveal">
+     <div class="tool-top"><span class="num">03</span><span class="kind">ARAÇ</span></div>
+     <h3>Whisper</h3>
+     <div class="what">Sesten altyazıya</div>
+     <p>OpenAI'ın sesi yazıya döken modeli. Türkçe dahil 99 dil. Altyazı dosyası çıkarır; bu Reels'teki altyazılar da ondan.</p>
+     <div class="ask"><small>CLAUDE'A ŞÖYLE DE</small><q>Bu videonun Türkçe altyazısını SRT olarak çıkar.</q></div>
+     <div class="tool-foot"><code>pip install -U openai-whisper</code><a href="https://github.com/openai/whisper" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </article>
+    <article class="tool reveal">
+     <div class="tool-top"><span class="num">04</span><span class="kind skill">SKILL</span></div>
+     <h3>HyperFrames <span class="alt">alternatif: Remotion</span></h3>
+     <div class="what">Koddan MP4'e</div>
+     <p>Claude sahneyi HTML ve kodla yazar, HyperFrames bunu MP4 videoya çevirir. Skill'i kurunca Claude bu işi nasıl yapacağını bilir; sen sadece ne istediğini anlatırsın.</p>
+     <div class="ask"><small>CLAUDE'A ŞÖYLE DE</small><q>Bu metinden 1080×1920, 20 saniyelik animasyonlu bir Reels yap.</q></div>
+     <div class="tool-foot"><code>npx skills add heygen-com/hyperframes</code><a href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </article>
+    <article class="tool reveal">
+     <div class="tool-top"><span class="num">05</span><span class="kind skill">SKILL</span></div>
+     <h3>GSAP</h3>
+     <div class="what">Her kayma, her zıplama</div>
+     <p>Animasyon motoru. Yazıların kayması, zıplaması, dönmesi, ekrandaki her hareket. Skill'ler Claude'a GSAP'i doğru kullanmayı öğretiyor.</p>
+     <div class="ask"><small>CLAUDE'A ŞÖYLE DE</small><q>Başlık harf harf düşsün, kartlar sağdan kayarak gelsin.</q></div>
+     <div class="tool-foot"><code>npx skills add greensock/gsap-skills</code><a href="https://github.com/greensock/gsap-skills" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+    </article>
+   </div>
+  </section>
+
+  <section id="prompt">
+   <div class="prompt-wrap">
+    <div class="prompt-side reveal">
+     <span class="label">Kopyala yapıştır</span>
+     <h2>Kurulumu <em>Claude yapsın.</em></h2>
+     <p>Bu prompt işletim sistemini kendisi anlıyor, eksik olan Python ya da Node'u önce kuruyor, her aracı tek tek test ediyor ve sonunda sürümleri listeliyor.</p>
+     <div class="note"><strong>Claude Code gerekiyor.</strong> Bilgisayarında komut çalıştırabildiği için kurulumu o yapıyor. claude.ai'deki normal sohbette çalışmaz.</div>
+    </div>
+    <div class="term reveal">
+     <div class="term-bar"><i></i><i></i><i></i><span>kurulum-prompt.txt</span><span class="chars" id="chars"></span></div>
+<pre id="promptText">Bilgisayarıma video üretimi için şu araçları kur ve her birinin çalıştığını test et:
+1. <span class="hl">FFmpeg</span>
+2. <span class="hl">yt-dlp</span>
+3. <span class="hl">OpenAI Whisper</span> (pip install -U openai-whisper)
+4. <span class="hl">HyperFrames</span> skill'i: npx skills add heygen-com/hyperframes
+5. <span class="hl">GSAP</span> skill'leri: npx skills add greensock/gsap-skills
+İşletim sistemimi kendin anla: Mac'te Homebrew, Windows'ta winget kullan. Python veya Node eksikse önce onları kur. Her adımdan önce ne yapacağını kısaca söyle, bitince her aracın sürümünü listele.</pre>
+     <div class="term-foot">
+      <button class="copy" type="button" data-copy="prompt"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span>Prompt'un tamamını kopyala</span></button>
+      <small>Tek dokunuş, hepsi panoda.</small>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="sonra">
+   <div class="head reveal">
+    <div><span class="label">Kurulum bitince</span><h2>İlk isteğini <em>buradan seç.</em></h2></div>
+    <p>Dokun, kopyalansın. Claude Code'a yapıştırıp dosyanın adını yazman yeterli.</p>
+   </div>
+   <div class="examples">
+    <button class="ex reveal" type="button" data-text="Masaüstündeki video.mp4'ün sesindeki gürültüyü temizle, sessiz yerleri kes ve sesi Instagram için -14 LUFS'a getir."><span>Videonun sesini temizle, sessiz yerleri kes.</span><em>Kopyala</em></button>
+    <button class="ex reveal" type="button" data-text="video.mp4 için Whisper ile Türkçe altyazı çıkar ve altyazıyı videonun altına göm."><span>Türkçe altyazı çıkar ve videoya göm.</span><em>Kopyala</em></button>
+    <button class="ex reveal" type="button" data-text="HyperFrames ve GSAP ile 1080x1920, 15 saniyelik bir Reels açılışı yap: büyük başlık harf harf düşsün, altında üç madde sırayla kaysın."><span>15 saniyelik animasyonlu Reels açılışı yap.</span><em>Kopyala</em></button>
+    <button class="ex reveal" type="button" data-text="Klasördeki tüm videoları birleştir, aralarına yumuşak geçiş koy ve dikey 1080x1920 MP4 olarak dışa aktar."><span>Videoları birleştir, dikey MP4 yap.</span><em>Kopyala</em></button>
+   </div>
+  </section>
+
+  <div class="end reveal">
+   <div><h2>Takılırsan yaz.</h2><p>Bu araçlarla yaptığım videoları Instagram'da paylaşıyorum.</p></div>
+   <a class="btn btn-ink" href="https://www.instagram.com/anilcodez/" target="_blank" rel="noopener noreferrer">@anilcodez <span class="arr">↗</span></a>
+  </div>
+ </main>
+</div>
+
+<div class="dock hide" id="dock">
+ <span>Kurulum prompt'u<small>Claude Code'a yapıştır</small></span>
+ <button class="copy" type="button" data-copy="prompt"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg><span>Kopyala</span></button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// Theme: follows the device setting; a manual pick lasts until the device setting changes.
+const toggle = document.getElementById('theme');
+const systemDark = matchMedia('(prefers-color-scheme: dark)');
+const KEY = 'anil-theme-v2';
+const systemTheme = () => systemDark.matches ? 'dark' : 'light';
+function setTheme(theme) {
+ document.documentElement.dataset.theme = theme;
+ toggle.textContent = theme === 'dark' ? '☀' : '☾';
+ toggle.setAttribute('aria-label', theme === 'dark' ? 'Açık temaya geç' : 'Koyu temaya geç');
+}
+function savedTheme() { try { const t = JSON.parse(localStorage.getItem(KEY) || 'null'); return t && t.system === systemTheme() && (t.theme === 'dark' || t.theme === 'light') ? t.theme : null; } catch { return null; } }
+function forget() { try { localStorage.removeItem(KEY); } catch {} }
+setTheme(savedTheme() || systemTheme());
+systemDark.addEventListener('change', () => { forget(); setTheme(systemTheme()); });
+toggle.addEventListener('click', () => {
+ const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+ setTheme(theme);
+ if (theme === systemTheme()) return forget();
+ try { localStorage.setItem(KEY, JSON.stringify({ theme, system: systemTheme() })); } catch {}
+});
+
+// Copy: Clipboard API first, then a textarea fallback for in-app browsers (Instagram),
+// and as a last resort select the prompt so a long-press copy works.
+const promptEl = document.getElementById('promptText');
+const PROMPT = promptEl.textContent.trim();
+document.getElementById('chars').textContent = PROMPT.length + ' karakter';
+const toast = document.getElementById('toast');
+let toastTimer;
+function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2200); }
+function fallbackCopy(text) {
+ const ta = document.createElement('textarea');
+ ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px';
+ document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+ let ok = false; try { ok = document.execCommand('copy'); } catch {}
+ ta.remove(); return ok;
+}
+async function copyText(text) {
+ // Some in-app browsers leave writeText pending forever, so give it a short deadline.
+ try {
+  if (navigator.clipboard && window.isSecureContext) {
+   const ok = await Promise.race([navigator.clipboard.writeText(text).then(() => true), new Promise(r => setTimeout(() => r(false), 900))]);
+   if (ok) return true;
+  }
+ } catch {}
+ return fallbackCopy(text);
+}
+function selectPrompt() { const r = document.createRange(); r.selectNodeContents(promptEl); const s = getSelection(); s.removeAllRanges(); s.addRange(r); promptEl.scrollIntoView({ block: 'center' }); }
+document.querySelectorAll('[data-copy="prompt"]').forEach(btn => btn.addEventListener('click', async () => {
+ const label = btn.querySelector('span'); const old = label.textContent;
+ if (await copyText(PROMPT)) {
+  document.querySelectorAll('[data-copy="prompt"]').forEach(b => b.classList.add('done'));
+  label.textContent = 'Kopyalandı ✓';
+  say('Prompt panoda. Claude Code\'a yapıştır.');
+  setTimeout(() => { label.textContent = old; document.querySelectorAll('[data-copy="prompt"]').forEach(b => b.classList.remove('done')); }, 2400);
+ } else { selectPrompt(); say('Metni seçtim, basılı tutup Kopyala de.'); }
+}));
+document.querySelectorAll('.ex').forEach(btn => btn.addEventListener('click', async () => {
+ const tag = btn.querySelector('em');
+ if (await copyText(btn.dataset.text)) { btn.classList.add('done'); tag.textContent = 'Kopyalandı'; say('Kopyalandı'); setTimeout(() => { btn.classList.remove('done'); tag.textContent = 'Kopyala'; }, 2000); }
+ else say(btn.dataset.text);
+}));
+
+// Mobile dock: show after the hero, hide while the prompt card itself is on screen.
+const dock = document.getElementById('dock');
+const hero = document.querySelector('.hero'), term = document.querySelector('.term');
+let pastHero = false, termVisible = false;
+const sync = () => dock.classList.toggle('hide', !pastHero || termVisible);
+new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; sync(); }).observe(hero);
+new IntersectionObserver(([e]) => { termVisible = e.isIntersecting; sync(); }, { threshold: .25 }).observe(term);
+
+// Scroll reveal.
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body></html>
